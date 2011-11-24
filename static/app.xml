@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+    <!-- /*
+ * Copyright (c) 2011 Google Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy
+ * of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */ -->
+  <ModulePrefs title="Starter App">
+    <Require feature="rpc"/>
+  </ModulePrefs>
+  <Content type="html"><![CDATA[
+<!DOCTYPE html>
+<!-- The hangout API JavaScript. Always include this first -->
+<script src="//hangoutsapi.talkgadget.google.com/hangouts/api/hangout.js?v=0.1"></script>
+<script type='text/javascript' src='http://www.scribd.com/javascripts/scribd_api.js'></script>
+
+<!-- The JavaScript for this app. This must always be a full URL not a
+     relative path.
+     Tip: You can load it from a local web server such as
+     http://localhost/app.js for faster single user development -->
+<script src="//YOUR_APP_ID.appspot.com/static/app.js"></script>
+
+<div>
+<div style="width: 512px; margin: 0 auto; border-right: 1px solid #EEE">
+<div id='embedded_doc'><a href="http://www.scribd.com">Scribd</a></div>
+
+<script type="text/javascript">
+var scribd_doc = scribd.Document.getDocFromUrl( 'YOUR_DOCUMENT_URL', 'YOUR_SCRIBD_PUBLISHER_ID' );
+
+var onDocReady = function(e){
+    scribd_doc.api.setZoom( 1.1 );
+}
+
+var onPageChange = function(e) {
+    console.log('New page in xml: ' + scribd_doc.api.getPage());
+    changePageForAll();
+}
+
+scribd_doc.addParam('jsapi_version', 2);
+scribd_doc.addParam('mode', 'slide');
+scribd_doc.addParam('height', 384);
+scribd_doc.addEventListener('docReady', onDocReady);
+scribd_doc.addEventListener('pageChanged', onPageChange);
+scribd_doc.write('embedded_doc');
+</script>
+
+</div>
+</div>
+
+]]></Content>
+</Module>
